@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smiles for Harini 💕</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      body {
+        position: relative;
+        overflow-x: hidden;
+      }
+      .love-note {
+        text-align: center;
+        font-size: 1.3rem;
+        color: #ff69b4;
+        margin-top: 1rem;
+        font-family: "Segoe UI", sans-serif;
+        animation: fadeIn 2s ease-in-out;
+      }
+      .heart {
+        position: absolute;
+        width: 15px;
+        height: 15px;
+        background: red;
+        transform: rotate(45deg);
+        animation: floatUp 5s linear infinite;
+        opacity: 0.7;
+      }
+      .heart::before,
+      .heart::after {
+        content: "";
+        position: absolute;
+        width: 15px;
+        height: 15px;
+        background: red;
+        border-radius: 50%;
+      }
+      .heart::before {
+        top: -7.5px;
+        left: 0;
+      }
+      .heart::after {
+        left: -7.5px;
+        top: 0;
+      }
+      @keyframes floatUp {
+        0% {
+          transform: translateY(0) rotate(45deg);
+          opacity: 0.7;
+        }
+        100% {
+          transform: translateY(-100vh) rotate(45deg);
+          opacity: 0;
+        }
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="love-note">
+      Just wanted to remind you you're the best thing that’s ever happened to
+      me.<br />
+      (Videos are randomized. You only get one shot per day — no do-overs 😤💅)
+    </div>
+    <div class="container">
+      <h1>For When You're Feeling</h1>
+
+      <div class="category">
+        <h2>Sad or Down</h2>
+        <button onclick="playRandom('sad')">Play Something Comforting</button>
+      </div>
+
+      <div class="category">
+        <h2>Angry or Frustrated</h2>
+        <button onclick="playRandom('angry')">Play Something Calming</button>
+      </div>
+
+      <div class="category">
+        <h2>Anxious or Overwhelmed</h2>
+        <button onclick="playRandom('anxious')">Play Something Soothing</button>
+      </div>
+
+      <div class="category">
+        <h2>Insecure or Self-Critical</h2>
+        <button onclick="playRandom('insecure')">
+          Play Something Reassuring
+        </button>
+      </div>
+
+      <div id="video-container"></div>
+      <a href="index.html" class="btn">Back Home</a>
+    </div>
+
+    <script>
+      const videos = {
+        sad: [
+          "https://www.youtube.com/embed/oy9INZRseJY?si=_FNY3sSfATx-eMJe",
+          "https://www.youtube.com/embed/lHvNHyYVjJo?si=ZjwJZLvrbTVyuVHd",
+          "https://www.youtube.com/embed/7ef1Xtlt9wk?si=GoyTCatdzazl8_KG",
+          "https://www.youtube.com/embed/c_J8F1CNJRo?si=eC2gQvtJ6aBMEmu_",
+          "https://www.youtube.com/embed/4SbqZgDB3q4?si=xxFuphr2Ag9hlYUI",
+          "https://www.youtube.com/embed/4a9VMdkbWIk?si=TsL-EZXHIJTMZP4Q",
+        ],
+        angry: [
+          "https://www.youtube.com/embed/AkZ0O57jsZM?si=-h7njFOE5U96COCj",
+          "https://www.youtube.com/embed/jBKJuCGk9pc?si=7RUvEkKYBLRNyYqH",
+          "https://www.youtube.com/embed/VRjDSMezuvY?si=gB4rV4Jv71cMRWQy",
+        ],
+        anxious: [
+          "https://www.youtube.com/embed/7GiVsBPOF8Q?si=7Lrwgz-8woD0vQw_",
+          "https://www.youtube.com/embed/jvEojVCpcqQ?si=w43_WUpUZBC9YiRZ",
+          "https://www.youtube.com/embed/admKKHgbq0c?si=v5jI8SuxX8a9m8gF",
+        ],
+        insecure: [
+          "https://www.youtube.com/embed/3fDwf1Dq1-4?si=0sGIXTnM9nwqh9xv",
+          "https://www.youtube.com/embed/YE58LbmeR0c?si=Oh7whfxUYHMe2iGk",
+          "https://www.youtube.com/embed/Ra-DB4xwQxs?si=iR5Oraahp7lokxaw",
+          "https://www.youtube.com/embed/46flD3lPlzc?si=9qqaJt1XOESrt72V",
+        ],
+      };
+
+      function playRandom(category) {
+        const list = videos[category];
+        const video = list[Math.floor(Math.random() * list.length)];
+        document.getElementById(
+          "video-container"
+        ).innerHTML = `<iframe width="560" height="315" src="${video}" frameborder="0" allowfullscreen></iframe>`;
+      }
+
+      function spawnHeart() {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.style.top = window.scrollY + window.innerHeight + "px";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 5000);
+      }
+
+      setInterval(spawnHeart, 400);
+    </script>
+  </body>
+</html>

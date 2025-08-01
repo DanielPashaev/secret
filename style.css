@@ -1,0 +1,123 @@
+/* === Global Style for Harini's Love Pages === */
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  background: linear-gradient(to right, #ffe0f0, #ffc1e3);
+  color: #550033;
+  text-align: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.container {
+  width: 90%;
+  max-width: 700px;
+  padding: 2rem;
+  margin-top: 2rem;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(255, 105, 180, 0.3);
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #d63384;
+}
+
+h2 {
+  color: #cc0066;
+  font-size: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.btn,
+button {
+  display: inline-block;
+  background: #ff66a3;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 25px;
+  text-decoration: none;
+  font-size: 1rem;
+  margin: 0.5rem;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.btn:hover,
+button:hover {
+  background: #ff3385;
+  transform: scale(1.05);
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 1rem;
+}
+
+ul li {
+  margin: 0.5rem 0;
+  font-style: italic;
+}
+
+#video-container {
+  margin: 2rem 0;
+}
+
+iframe {
+  max-width: 100%;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(255, 105, 180, 0.4);
+}
+
+.memories {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 1rem;
+}
+
+.memories button {
+  background-color: #ff99cc;
+  font-weight: bold;
+  padding: 0.6rem 1.2rem;
+  border-radius: 12px;
+}
+
+.memory-display {
+  margin-top: 2rem;
+}
+
+.memory-display img,
+.memory-display video {
+  max-width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(255, 105, 180, 0.3);
+}
+
+.scroll-btn {
+  font-size: 2.5rem;
+  cursor: pointer;
+  user-select: none;
+  margin: 0 1rem;
+  color: #ff69b4; /* Pink */
+  transition: transform 0.2s;
+}
+
+.scroll-btn:hover {
+  transform: scale(1.2);
+}

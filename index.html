@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>For Pwincess Harini 💖</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      body {
+        position: relative;
+        overflow-x: hidden;
+        margin: 0;
+      }
+      .love-note {
+        text-align: center;
+        font-size: 1.3rem;
+        color: #ff69b4;
+        margin-top: 1rem;
+        font-family: "Segoe UI", sans-serif;
+        animation: fadeIn 2s ease-in-out;
+      }
+
+      .heart {
+        position: fixed; /* changed from absolute */
+        width: 15px;
+        height: 15px;
+        background: red;
+        transform: rotate(45deg);
+        animation: floatUp 5s linear forwards;
+        opacity: 0.7;
+        pointer-events: none; /* prevents accidental interaction */
+        z-index: 1000;
+      }
+      .heart::before,
+      .heart::after {
+        content: "";
+        position: absolute;
+        width: 15px;
+        height: 15px;
+        background: red;
+        border-radius: 50%;
+      }
+      .heart::before {
+        top: -7.5px;
+        left: 0;
+      }
+      .heart::after {
+        left: -7.5px;
+        top: 0;
+      }
+      @keyframes floatUp {
+        0% {
+          transform: translateY(0) rotate(45deg);
+          opacity: 0.7;
+        }
+        100% {
+          transform: translateY(-100vh) rotate(45deg);
+          opacity: 0;
+        }
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="love-note">
+      Happy National Girlfriend Day, Harini<br />
+      You light up my world every single day. I made this to remind you how
+      deeply you’re loved and for whenever you miss the goat.
+    </div>
+    <div class="container">
+      <h1>Welcome, My Queen 💗</h1>
+      <p class="subtitle">Press below for a smile 💞</p>
+      <a href="smile.html" class="btn">Cheer Me Up</a>
+      <a href="memory.html" class="btn">Memory Lane </a>
+    </div>
+
+    <script>
+      function spawnHeart() {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.style.top = window.scrollY + window.innerHeight + "px";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 5000);
+      }
+      setInterval(spawnHeart, 400);
+
+      setInterval(spawnHeart, 400);
+    </script>
+  </body>
+</html>

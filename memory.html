@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Memory Lane 💖</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(to right, #ffe4e1, #fff0f5);
+        margin: 0;
+        padding: 0;
+        color: #333;
+        text-align: center;
+      }
+
+      .container {
+        padding: 2rem;
+        max-width: 1200px;
+        margin: auto;
+      }
+
+      h1 {
+        font-size: 3rem;
+        color: #d63384;
+        margin-bottom: 1.5rem;
+      }
+
+      .memories-container {
+        display: flex;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        gap: 1rem;
+        padding: 1rem 0;
+      }
+
+      .memory {
+        min-width: 300px;
+        max-width: 300px;
+        height: 400px;
+        flex-shrink: 0;
+        perspective: 1000px;
+      }
+
+      .memory-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        transition: transform 0.6s;
+        transform-style: preserve-3d;
+        border: 2px solid pink;
+        border-radius: 12px;
+        background-color: #fff0f5;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+      }
+
+      .memory:hover .memory-inner {
+        transform: scale(1.03);
+      }
+
+      .memory.flipped .memory-inner {
+        transform: rotateY(180deg);
+      }
+
+      .memory-front,
+      .memory-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        border-radius: 12px;
+        overflow: hidden;
+      }
+
+      .memory-front img,
+      .memory-front video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      /* For images of text that shouldn't be cropped */
+      .memory-front img[src*="text"],
+      .memory-front img[src*="cloud"],
+      .memory-front img[src*="send-tiktoks"],
+      .memory-front img[src*="dt-bar"],
+      .memory-front img[src*="nicest"] {
+        object-fit: contain;
+        background-color: white;
+        padding: 0.5rem;
+      }
+
+      .memory-back {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #fff0f5;
+        transform: rotateY(180deg);
+        padding: 1rem;
+        box-sizing: border-box;
+        overflow-y: auto;
+      }
+
+      .memory-back p {
+        font-size: 1.1rem;
+        color: #d63384;
+        line-height: 1.4;
+      }
+
+      .scroll-btn {
+        font-size: 2.5rem;
+        cursor: pointer;
+        user-select: none;
+        margin: 0 1rem;
+        color: pink;
+        transition: transform 0.2s;
+      }
+
+      .scroll-btn:hover {
+        transform: scale(1.2);
+      }
+
+      .scroll-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .btn {
+        display: inline-block;
+        margin-top: 2rem;
+        padding: 0.75rem 1.5rem;
+        background-color: #d63384;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        text-decoration: none;
+        font-size: 1rem;
+        transition: background 0.3s;
+      }
+
+      .btn:hover {
+        background-color: #c2185b;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Memory Lane 🌸</h1>
+      <div class="scroll-wrapper">
+        <div class="scroll-btn" onclick="scrollMemories(-1)">⏪</div>
+        <div class="memories-container" id="memories"></div>
+        <div class="scroll-btn" onclick="scrollMemories(1)">⏩</div>
+      </div>
+      <a href="index.html" class="btn">Back Home 🏠</a>
+    </div>
+    <script>
+      const memories = [
+        {
+          type: "img",
+          src: "media/first-texts.jpg",
+          caption:
+            "Our very first texts we sent on iMessages. This is where everything started. I loved texting you on hinge and I just felt so comfortable with you. And just remember thinking how funny and beautiful you were. ",
+        },
+        {
+          type: "img",
+          src: "media/dt-bar.jpg",
+          caption:
+            "Me not knowing 9ds bar 😅 Thats crazy I didn't even know what it was at this point in time. ",
+        },
+        {
+          type: "img",
+          src: "media/cloud-texts.jpg",
+          caption:
+            "Texts before meeting at Cloud. This was when we first met each other in real life at cloud and the night we first hung out dt and we ate Chick-fil-A together.",
+        },
+        {
+          type: "img",
+          src: "media/send-tiktoks.jpg",
+          caption:
+            "This was when we first started sending each other TikToks. The beginning of our Tiktoks spams. ",
+        },
+        {
+          type: "img",
+          src: "media/nicest-text.jpg",
+          caption:
+            "I don't think I've ever received a text this nice. I remember you asking me what my best compliment text ive received ever and this definitely is it. Idk it made me feel some type of way.",
+        },
+        {
+          type: "img",
+          src: "media/first-flowers.jpg",
+          caption:
+            "These are the first flowers I ever got you. Red roses lowkey kinda basic. My flower taste only improved from here I must say. ",
+        },
+        {
+          type: "img",
+          src: "media/home-dinner.jpg",
+          caption:
+            "This was the little home dinner date I planned out where my friends were the chefs. Was funny and I liked this night personally. We dont talk about my fit and how chopped I look here tho. ",
+        },
+        {
+          type: "img",
+          src: "media/gifts-gf.jpg",
+          caption:
+            "Pic of me preparing to ask you out to be my girlfriend for the second time. Had hyperpigmentation on one hand and my most memorable flowers on my other. As well as a tuff fit on",
+        },
+        {
+          type: "img",
+          src: "media/cake-restaurant.jpg",
+          caption:
+            "Look how cute you looked here. This was when I got the cake at publix and wrote on it and surprised you at the mexican restaurant with the megan music in the back, one of my smarter plans.",
+        },
+        {
+          type: "img",
+          src: "media/harshini-throwup.jpg",
+          caption:
+            "This was funny to me, I don't know why. Just seeing harshini in the little corner was funny. I think it was because it was also before we were official again and I remember nidhi telling me that we make a cute couple and that we are good for each other. ",
+        },
+        {
+          type: "img",
+          src: "media/pink-dress.jpg",
+          caption:
+            "Look at this aphoridte. You looked so good in this indian traditional dress and I cant wait to see you in more. I remember asking harshini to show me what you looked like in it and I was like wow. ",
+        },
+        {
+          type: "img",
+          src: "media/beach-us.jpg",
+          caption:
+            "This was the first time we were at the beach together. I remember being at JC one day eating at dinner with all my friends and then the next thing I know im driving at night to florida to see you. It was a calm lil trip with shreya and I enjoyed the pool and hot tubs with you, oh and sleeping with you. After this you told your parents about me for the first time. ",
+        },
+        {
+          type: "img",
+          src: "media/pink-whitney.jpg",
+          caption:
+            "The fateful night I drank half the bottle of pink whitney. I still don't know how I managed to drink this much without you forcing me to stop lol. That was something else, I just got some weird feeling in my head trying to remember this night. Was a interesting night to say the least.  ",
+        },
+        {
+          type: "img",
+          src: "media/grad-photo.jpg",
+          caption:
+            "The big day for the goat. I graduated and had my little grad pre. Looking forward to the professional grad pics in the future. ",
+        },
+        {
+          type: "img",
+          src: "media/wallet-photo.jpg",
+          caption:
+            "I remember thinking of this ingenious idea to have a photo of you in my wallet. I was like wow this is so cute I can see harini whenever I want and do voodoo magic on her. I still have it in my wallet to this day.",
+        },
+        {
+          type: "img",
+          src: "media/jewelry.jpg",
+          caption:
+            "My first time buying jewelery for a girl ever. I remember wanting to buy you something special while I was on the cruise. I saw this bracelet and thought it would look really good on you. Also, my grandma really really liked it so its also something I can remember her by, all her love is in there too. ",
+        },
+        {
+          type: "video",
+          src: "media/dt-cute.mp4",
+          caption:
+            "This was a little random dt day that harshini was craving. Was a fun little time with that free queso and stuff. We were discussing how excited you guys were to going for school and I cant wait for you guys to experience that, safely. (nerd emoji)",
+        },
+        {
+          type: "video",
+          src: "media/margs-throwup.mp4",
+          caption:
+            "This was the night we drank all those margs and thought we would we fine, well I was! But you threw up bc u were a lightweight. Was a fun night as well. ",
+        },
+        {
+          type: "video",
+          src: "media/bday-dinner.mp4",
+          caption:
+            "This was a fun day too. Those chicken fajitas were so good and you looked so cute in your little dress. Even cuter with the big mexican hat on. I dont regret telling the waiters to set something up for your guys birthday. ",
+        },
+        {
+          type: "video",
+          src: "media/table-tennis.mp4",
+          caption:
+            "Look at how athletic and cute you are trying to see the ball and hit it with ur paddle. Our kids will be so athletic !",
+        },
+        {
+          type: "img",
+          src: "media/pinwheels.jpg",
+          caption:
+            "I genuinely didnt think the pinwheeels would come out this good. I remember eating them at maanavs little grad family function and asking his mom for the recipe and wanting to make them for you. We did good. ",
+        },
+        {
+          type: "video",
+          src: "media/dt-pregame.mp4",
+          caption:
+            "This video was just too cute not to include. Look at you, you look SOOOOO CUTTTTEEE HMMMMM 😍",
+        },
+        {
+          type: "img",
+          src: "media/bonnet.jpg",
+          caption:
+            "Tuff fit with the bonnet ! That was funny sleeping tg with it, ngl tho i prefer touching your hair so thats prolly the last night for you w a bonnet while sleeping with me.",
+        },
+      ];
+
+      function scrollMemories(direction) {
+        const container = document.getElementById("memories");
+        const scrollAmount = 350;
+        container.scrollBy({
+          left: direction * scrollAmount,
+          behavior: "smooth",
+        });
+      }
+
+      function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+      }
+
+      function displayMemories() {
+        const container = document.getElementById("memories");
+        const shuffled = shuffleArray(memories);
+        shuffled.forEach((mem) => {
+          const memory = document.createElement("div");
+          memory.className = "memory";
+          memory.innerHTML = `
+            <div class="memory-inner">
+              <div class="memory-front">
+                ${
+                  mem.type === "img"
+                    ? `<img src="${mem.src}" alt="">`
+                    : `<video controls><source src="${mem.src}" type="video/mp4"></video>`
+                }
+              </div>
+              <div class="memory-back">
+                <p>${mem.caption}</p>
+              </div>
+            </div>
+          `;
+          memory.addEventListener("click", () =>
+            memory.classList.toggle("flipped")
+          );
+          container.appendChild(memory);
+        });
+      }
+
+      displayMemories();
+    </script>
+  </body>
+</html>
