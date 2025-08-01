@@ -3,101 +3,70 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>For Pwincess Harini 💖</title>
+    <title>Login for Harini</title>
     <link rel="stylesheet" href="style.css" />
     <style>
       body {
-        position: relative;
-        overflow-x: hidden;
-        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: linear-gradient(to right, #ffe0f0, #ffc1e3);
       }
-      .love-note {
+      .login-box {
+        background: white;
+        padding: 2rem;
+        border-radius: 15px;
+        box-shadow: 0 0 20px rgba(255, 105, 180, 0.3);
         text-align: center;
-        font-size: 1.3rem;
-        color: #ff69b4;
-        margin-top: 1rem;
-        font-family: "Segoe UI", sans-serif;
-        animation: fadeIn 2s ease-in-out;
       }
-
-      .heart {
-        position: fixed; /* changed from absolute */
-        width: 15px;
-        height: 15px;
-        background: red;
-        transform: rotate(45deg);
-        animation: floatUp 5s linear forwards;
-        opacity: 0.7;
-        pointer-events: none; /* prevents accidental interaction */
-        z-index: 1000;
+      input {
+        display: block;
+        margin: 1rem auto;
+        padding: 0.5rem 1rem;
+        border: 2px solid #ff99cc;
+        border-radius: 8px;
       }
-      .heart::before,
-      .heart::after {
-        content: "";
-        position: absolute;
-        width: 15px;
-        height: 15px;
-        background: red;
-        border-radius: 50%;
+      button {
+        background: #ff66a3;
+        color: white;
+        padding: 0.5rem 1.2rem;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
       }
-      .heart::before {
-        top: -7.5px;
-        left: 0;
-      }
-      .heart::after {
-        left: -7.5px;
-        top: 0;
-      }
-      @keyframes floatUp {
-        0% {
-          transform: translateY(0) rotate(45deg);
-          opacity: 0.7;
-        }
-        100% {
-          transform: translateY(-100vh) rotate(45deg);
-          opacity: 0;
-        }
-      }
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-        }
-        to {
-          opacity: 1;
-        }
+      button:hover {
+        background: #ff3385;
       }
     </style>
   </head>
   <body>
     <script>
-      if (sessionStorage.getItem("authenticated") !== "true") {
+      if (localStorage.getItem("loggedIn") !== "true") {
         window.location.href = "login.html";
       }
     </script>
-    <div class="love-note">
-      Happy National Girlfriend Day, Harini<br />
-      You light up my world every single day. I made this to remind you how
-      deeply you’re loved and for whenever you miss the goat.
-    </div>
-    <div class="container">
-      <h1>Welcome, My Queen 💗</h1>
-      <p class="subtitle">Press below for a smile 💞</p>
-      <a href="smile.html" class="btn">Cheer Me Up</a>
-      <a href="memory.html" class="btn">Memory Lane </a>
+
+    <div class="login-box">
+      <h2>Only for Harini 😤</h2>
+      <input type="text" id="username" placeholder="Username" />
+      <input type="password" id="password" placeholder="Password" />
+      <button onclick="login()">Enter</button>
+      <p id="error" style="color: red"></p>
     </div>
 
     <script>
-      function spawnHeart() {
-        const heart = document.createElement("div");
-        heart.className = "heart";
-        heart.style.left = Math.random() * window.innerWidth + "px";
-        heart.style.top = window.scrollY + window.innerHeight + "px";
-        document.body.appendChild(heart);
-        setTimeout(() => heart.remove(), 5000);
+      function login() {
+        const user = document.getElementById("username").value.trim();
+        const pass = document.getElementById("password").value.trim();
+        if (user === "harini" && pass === "onlyforqueen") {
+          localStorage.setItem("loggedIn", "true");
+          window.location.href = "index.html";
+        } else {
+          document.getElementById("error").textContent =
+            "hey I said only for harini, not you! 😤";
+        }
       }
-      setInterval(spawnHeart, 400);
-
-      setInterval(spawnHeart, 400);
     </script>
   </body>
 </html>
